@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NBE Transfer Info</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f2f3ed;
+      margin: 0;
+      padding: 1em;
+      color: #333;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 1em;
+    }
+
+    .logo img {
+      width: 180px;
+    }
+
+    .headline {
+      text-align: center;
+      font-size: 1.4em;
+      margin-bottom: 1.5em;
+      color: #006341;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin: 1em 0;
+      padding: 1em;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: background-color 0.2s ease;
+    }
+
+    .container:hover {
+      background-color: #f1fdf7;
+    }
+
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5em;
+    }
+
+    .title-en, .title-ar {
+      font-weight: bold;
+      flex: 1;
+    }
+
+    .title-en {
+      text-align: left;
+    }
+
+    .title-ar {
+      text-align: right;
+    }
+
+    .detail-box {
+      background-color: #fff7e6;
+      border-radius: 6px;
+      padding: 0.7em;
+      text-align: center;
+      font-size: 1.1em;
+      direction: ltr;
+      word-break: break-word;
+    }
+
+    .copy-btn {
+      width: 100%;
+      background-color: #00733e;
+      color: white;
+      border: none;
+      padding: 0.5em;
+      margin-top: 0.6em;
+      font-size: 1em;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      background-color: #005c31;
+    }
+
+    .toast {
+      visibility: hidden;
+      min-width: 250px;
+      margin-left: -125px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 1em;
+      position: fixed;
+      z-index: 1;
+      left: 50%;
+      bottom: 30px;
+      font-size: 1em;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <img src="https://www.nbe.com.eg/NBE/Mainsite/siteimages/NBE-logo.svg" alt="NBE Logo">
+  </div>
+
+  <div class="headline">
+    Bank Transfer Details<br>
+    بيانات التحويل البنكي
+  </div>
+
+  <!-- عناصر التحويل -->
+  <div class="container">
+    <div class="title-row">
+      <div class="title-en">Account Holder Name</div>
+      <div class="title-ar">اسم صاحب الحساب</div>
+    </div>
+    <div class="detail-box" id="value1">محمد سعيد محمود السيد</div>
+    <button class="copy-btn" onclick="copyText('value1')">Copy نسخ</button>
+  </div>
+
+  <div class="container">
+    <div class="title-row">
+      <div class="title-en">Account Number</div>
+      <div class="title-ar">رقم الحساب</div>
+    </div>
+    <div class="detail-box" id="value2">4065001361226000012</div>
+    <button class="copy-btn" onclick="copyText('value2')">Copy نسخ</button>
+  </div>
+
+  <div class="container">
+    <div class="title-row">
+      <div class="title-en">IBAN</div>
+      <div class="title-ar">رقم الايبان</div>
+    </div>
+    <div class="detail-box" id="value3">EG660003040650013612260000120</div>
+    <button class="copy-btn" onclick="copyText('value3')">Copy نسخ</button>
+  </div>
+
+  <div class="container">
+    <div class="title-row">
+      <div class="title-en">SWIFT Code</div>
+      <div class="title-ar">سويفت كود</div>
+    </div>
+    <div class="detail-box" id="value4">NBEGEGCX406</div>
+    <button class="copy-btn" onclick="copyText('value4')">Copy نسخ</button>
+  </div>
+
+  <div class="container">
+    <div class="title-row">
+      <div class="title-en">Branch</div>
+      <div class="title-ar">الفرع</div>
+    </div>
+    <div class="detail-box" id="value5">MENOFIA UNIV BRANCH</div>
+    <button class="copy-btn" onclick="copyText('value5')">Copy نسخ</button>
+  </div>
+
+  <div class="container">
+    <div class="title-row">
+      <div class="title-en">Currency</div>
+      <div class="title-ar">العملة</div>
+    </div>
+    <div class="detail-box" id="value6">US Dollars (USD)</div>
+    <button class="copy-btn" onclick="copyText('value6')">Copy نسخ</button>
+  </div>
+
+  <div class="container">
+    <div class="title-row">
+      <div class="title-en">Bank Address</div>
+      <div class="title-ar">عنوان البنك</div>
+    </div>
+    <div class="detail-box" id="value7">MENOUFIA UNIVERSITY</div>
+    <button class="copy-btn" onclick="copyText('value7')">Copy نسخ</button>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Copied!</div>
+
+  <script>
+    function copyText(elementId) {
+      const text = document.getElementById(elementId).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Copied:\n' + text);
+      });
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.className = "toast show";
+      setTimeout(() => {
+        toast.className = toast.className.replace("show", "");
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
