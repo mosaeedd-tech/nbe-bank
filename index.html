@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NBE Transfer Info</title>
 
-
-  <!-- ✅ START: Link preview (WhatsApp, Facebook, etc.) -->
+  <!-- ✅ Link preview for WhatsApp, Facebook, etc. -->
   <meta property="og:title" content="Bank Transfer Details - NBE Account" />
   <meta property="og:description" content="Send money securely to my National Bank of Egypt account. View full transfer details with one click." />
   <meta property="og:image" content="https://mosaeedd-tech.github.io/nbe-bank/NBE-preview.png">
@@ -16,7 +14,7 @@
   <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://mosaeedd-tech.github.io/nbe-bank/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <!-- ✅ END -->
+  <!-- ✅ End preview -->
 
   <style>
     body {
@@ -103,6 +101,22 @@
       background-color: #005c31;
     }
 
+    .download-btn {
+      width: 100%;
+      background-color: #e55353;
+      color: white;
+      border: none;
+      padding: 0.8em;
+      font-size: 1.1em;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 2em;
+    }
+
+    .download-btn:hover {
+      background-color: #d13c3c;
+    }
+
     .toast {
       visibility: hidden;
       min-width: 250px;
@@ -137,7 +151,7 @@
     بيانات التحويل البنكي
   </div>
 
-  <!-- عناصر التحويل -->
+  <!-- Account Holder Name -->
   <div class="container">
     <div class="title-row">
       <div class="title-en">Account Holder Name</div>
@@ -145,8 +159,12 @@
     </div>
     <div class="detail-box" id="value1">محمد سعيد محمود السيد</div>
     <button class="copy-btn" onclick="copyText('value1')">Copy نسخ</button>
+
+    <div class="detail-box" id="value1b" style="margin-top: 1em;">MOHAMED SAEED MAHMOUD EL SAYED</div>
+    <button class="copy-btn" onclick="copyText('value1b')">Copy نسخ</button>
   </div>
 
+  <!-- Account Number -->
   <div class="container">
     <div class="title-row">
       <div class="title-en">Account Number</div>
@@ -156,6 +174,7 @@
     <button class="copy-btn" onclick="copyText('value2')">Copy نسخ</button>
   </div>
 
+  <!-- IBAN -->
   <div class="container">
     <div class="title-row">
       <div class="title-en">IBAN</div>
@@ -165,6 +184,7 @@
     <button class="copy-btn" onclick="copyText('value3')">Copy نسخ</button>
   </div>
 
+  <!-- SWIFT -->
   <div class="container">
     <div class="title-row">
       <div class="title-en">SWIFT Code</div>
@@ -174,6 +194,7 @@
     <button class="copy-btn" onclick="copyText('value4')">Copy نسخ</button>
   </div>
 
+  <!-- Branch -->
   <div class="container">
     <div class="title-row">
       <div class="title-en">Branch</div>
@@ -183,6 +204,7 @@
     <button class="copy-btn" onclick="copyText('value5')">Copy نسخ</button>
   </div>
 
+  <!-- Currency -->
   <div class="container">
     <div class="title-row">
       <div class="title-en">Currency</div>
@@ -192,6 +214,7 @@
     <button class="copy-btn" onclick="copyText('value6')">Copy نسخ</button>
   </div>
 
+  <!-- Bank Address -->
   <div class="container">
     <div class="title-row">
       <div class="title-en">Bank Address</div>
@@ -201,7 +224,20 @@
     <button class="copy-btn" onclick="copyText('value7')">Copy نسخ</button>
   </div>
 
-  <!-- Toast Notification -->
+  <!-- Date of Birth -->
+  <div class="container">
+    <div class="title-row">
+      <div class="title-en">Date of Birth</div>
+      <div class="title-ar">تاريخ الميلاد</div>
+    </div>
+    <div class="detail-box" id="value8">13/08/1999</div>
+    <button class="copy-btn" onclick="copyText('value8')">Copy نسخ</button>
+  </div>
+
+  <!-- Download PDF Button -->
+  <button class="download-btn" onclick="window.print()">Download as PDF</button>
+
+  <!-- Toast -->
   <div id="toast" class="toast">Copied!</div>
 
   <script>
