@@ -139,6 +139,13 @@
       visibility: visible;
       opacity: 1;
     }
+
+    /* ✅ Prevent container break in print */
+    @media print {
+      .container {
+        page-break-inside: avoid;
+      }
+    }
   </style>
 </head>
 <body>
